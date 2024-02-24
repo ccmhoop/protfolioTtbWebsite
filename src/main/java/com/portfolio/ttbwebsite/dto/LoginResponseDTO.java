@@ -3,7 +3,6 @@ package com.portfolio.ttbwebsite.dto;
 import com.portfolio.ttbwebsite.models.ApplicationUser;
 
 public class LoginResponseDTO {
-
     private ApplicationUser user;
     private String jwt;
 
@@ -11,24 +10,25 @@ public class LoginResponseDTO {
         super();
     }
 
-    public LoginResponseDTO(ApplicationUser user, String jwt) {
+    public LoginResponseDTO(ApplicationUser user, String jwt){
         this.user = user;
         this.jwt = jwt;
     }
 
-    public ApplicationUser getUser() {
+    public ApplicationUser getUser(){
         return this.user;
     }
 
-    public void setUser(ApplicationUser user) {
+    public void setUser(ApplicationUser user){
         this.user = user;
     }
 
-    public String getJwt() {
+    public String getJwt(){
         return this.jwt;
     }
 
-    public void setJwt(String jwt) {
+    public void setJwt(String jwt){
         this.jwt = jwt;
     }
+
 }

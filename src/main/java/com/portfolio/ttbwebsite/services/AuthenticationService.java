@@ -1,22 +1,22 @@
 package com.portfolio.ttbwebsite.services;
 
+
+import java.util.HashSet;
+import java.util.Set;
+
 import com.portfolio.ttbwebsite.dto.LoginResponseDTO;
 import com.portfolio.ttbwebsite.models.ApplicationUser;
 import com.portfolio.ttbwebsite.models.Role;
 import com.portfolio.ttbwebsite.repository.RoleRepository;
 import com.portfolio.ttbwebsite.repository.UserRepository;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
-import java.util.HashSet;
-import java.util.Set;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @Transactional
@@ -44,20 +44,22 @@ public class AuthenticationService {
 
     }
 
-    public LoginResponseDTO loginUser(String username, String password) {
+    public LoginResponseDTO loginUser(String username, String password){
 
-        try {
+        try{
             Authentication auth = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password));
+                    new UsernamePasswordAuthenticationToken(username, password)
+            );
 
             String token = tokenService.generateJwt(auth);
 
             return new LoginResponseDTO(userRepository.findByUsername(username).get(), token);
 
-        } catch (AuthenticationException e) {
+        } catch(AuthenticationException e){
             return new LoginResponseDTO(null, "");
         }
-
     }
+
+
 
 }

@@ -44,9 +44,9 @@ public class AuthenticationService {
 
     }
 
-    public LoginResponseDTO loginUser(String username, String password){
+    public LoginResponseDTO loginUser(String username, String password) {
 
-        try{
+        try {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(username, password)
             );
@@ -54,12 +54,12 @@ public class AuthenticationService {
             String token = tokenService.generateJwt(auth);
 
             return new LoginResponseDTO(userRepository.findByUsername(username).get(), token);
-
         } catch(AuthenticationException e){
+
             return new LoginResponseDTO(null, "");
+
         }
+        }
+
+
     }
-
-
-
-}

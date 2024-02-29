@@ -35,7 +35,7 @@ public class TokenService {
                 .subject(auth.getName())
                 .claim("roles", scope)
                 .build();
-
+        System.out.println(claims);
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
     }
 }

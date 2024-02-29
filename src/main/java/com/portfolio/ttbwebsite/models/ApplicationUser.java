@@ -12,19 +12,14 @@ import java.util.Set;
 public class ApplicationUser implements UserDetails {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "user_id")
+    @GeneratedValue
     private Integer userId;
     @Column(unique = true)
     private String username;
     private String password;
 
     @ManyToMany(fetch =FetchType.EAGER)
-    @JoinTable(
-            name = "user_role_junction",
-            joinColumns = {@JoinColumn(name = "user_id")},
-            inverseJoinColumns = {@JoinColumn(name = "role_id")}
-    )
+    @JoinTable(name = "user_role_junction")
     private Set<Role> authorities;
 
     public ApplicationUser(){
